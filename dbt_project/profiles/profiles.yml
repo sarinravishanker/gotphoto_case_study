@@ -1,0 +1,16 @@
+gotphoto_snowflake:
+  target: "{{ env_var('DBT_ENV') }}"
+  outputs:
+    dev:
+      account: jq81284.europe-west3.gcp
+      database: SNOWFLAKE_SAMPLE_DATA
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: ACCOUNTADMIN
+      schema: DEFAULT
+      threads: 1
+      type: snowflake
+      user: "{{ env_var('SNOWFLAKE_USERNAME') }}"
+      warehouse: COMPUTE_WH
+      client_session_keep_alive: False
+      # Other environment-specific configurations can be added here
+
