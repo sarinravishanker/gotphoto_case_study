@@ -1,7 +1,7 @@
 gotphoto_snowflake:
   target: "{{ env_var('DBT_ENV') }}"
   outputs:
-    dev:
+    sandbox:
       account: jq81284.europe-west3.gcp
       database: SNOWFLAKE_SAMPLE_DATA
       password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"

@@ -11,3 +11,17 @@ clean-targets: # directories to be removed by `dbt clean`
     - "target"
     - "dbt_packages"
     - "logs"
+
+flags:
+  require_explicit_package_overrides_for_builtin_materializations: false
+
+models:
+  dbt_project_bigquery:
+    staging:
+      +materialized: table
+      +tags: ['staging']
+      +schema: 'staging'
+    mart:
+      +materialized: table
+      +tags: ['mart']
+      +schema: 'mart'
