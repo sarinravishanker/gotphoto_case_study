@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+  airflow-webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Use the custom Dockerfile
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - SNOWFLAKE_USERNAME=${SNOWFLAKE_USERNAME}
+      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags  # Mount the correct DAGs folder
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./dbt_project:/opt/airflow/dbt_project  # Mount the dbt_project directory
+    ports:
+      - "8080:8080"
+    command: ["bash", "-c", "airflow db init && airflow users create --username airflow --firstname Admin --lastname User --role Admin --email admin@example.com --password airflow && airflow webserver"]
+
+  airflow-scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Use the custom Dockerfile
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+    command: ["bash", "-c", "airflow db init && airflow scheduler"]
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags  # Mount the correct DAGs folder
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./dbt_project:/opt/airflow/dbt_project  # Mount the dbt_project directory
+

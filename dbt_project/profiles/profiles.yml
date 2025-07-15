@@ -3,11 +3,11 @@ gotphoto_snowflake:
     sandbox:
       account: jq81284.europe-west3.gcp
       database: ANALYTICS_DB
-      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      password: 'EPl3X7WocDZ71M'
       role: ACCOUNTADMIN
       schema: DEFAULT
       type: snowflake
-      user: "{{ env_var('SNOWFLAKE_USERNAME') }}"
+      user: sarinravishanker
       warehouse: COMPUTE_WH
       client_session_keep_alive: False
   target: sandbox
