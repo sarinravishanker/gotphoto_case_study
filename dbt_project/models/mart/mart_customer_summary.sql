@@ -7,4 +7,4 @@ SELECT
   SUM(o.total_price) AS total_spend
 FROM {{ ref('stg_customer') }} c
 LEFT JOIN {{ ref('stg_orders') }} o ON c.customer_key = o.customer_key
-GROUP BY c.customer_key, c.customer_name;
+GROUP BY c.customer_key, c.customer_name

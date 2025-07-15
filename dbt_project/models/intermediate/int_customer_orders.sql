@@ -10,4 +10,4 @@ SELECT
   o.order_date
 FROM {{ ref('stg_customer') }} c
 LEFT JOIN {{ ref('stg_orders') }} o
-  ON c.customer_key = o.customer_key;
+  ON c.customer_key = o.customer_key

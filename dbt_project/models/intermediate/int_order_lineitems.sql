@@ -13,4 +13,4 @@ SELECT
   l.ship_date
 FROM {{ ref('stg_orders') }} o
 LEFT JOIN {{ ref('stg_lineitem') }} l
-  ON o.order_key = l.order_key;
+  ON o.order_key = l.order_key

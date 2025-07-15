@@ -8,4 +8,4 @@ SELECT
   ps.supply_cost
 FROM {{ ref('stg_supplier') }} s
 LEFT JOIN {{ ref('stg_partsupp') }} ps
-  ON s.supplier_key = ps.supplier_key;
+  ON s.supplier_key = ps.supplier_key

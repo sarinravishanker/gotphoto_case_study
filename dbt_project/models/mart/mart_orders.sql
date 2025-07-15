@@ -14,4 +14,4 @@ SELECT
 FROM {{ ref('int_customer_orders') }} o
 LEFT JOIN {{ ref('stg_customer') }} c ON o.customer_key = c.customer_key
 LEFT JOIN {{ ref('int_order_lineitems') }} l ON o.order_key = l.order_key
-LEFT JOIN {{ ref('stg_part') }} p ON l.part_key = p.part_key;
+LEFT JOIN {{ ref('stg_part') }} p ON l.part_key = p.part_key
