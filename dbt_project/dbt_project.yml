@@ -25,3 +25,11 @@ models:
       +materialized: table
       +tags: ['staging']
       +schema: 'STAGING'
+    intermediate:
+      +materialized: table
+      +tags: ['intermediate']
+      +schema: 'INTERMEDIATE'
+    mart:
+      +materialized: table
+      +tags: ['mart']
+      +schema: 'MART'

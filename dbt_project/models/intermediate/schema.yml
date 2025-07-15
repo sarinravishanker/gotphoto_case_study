@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: int_customer_orders
+    description: "Joins customers and orders for downstream marts."
+    columns:
+      - name: customer_key
+      - name: customer_name
+      - name: nation_key
+      - name: order_key
+      - name: order_status
+      - name: total_price
+      - name: order_date
+  - name: int_order_lineitems
+    description: "Joins orders and lineitems for downstream marts."
+    columns:
+      - name: order_key
+      - name: customer_key
+      - name: line_number
+      - name: part_key
+      - name: supplier_key
+      - name: quantity
+      - name: extended_price
+      - name: discount
+      - name: tax
+      - name: ship_date
+  - name: int_supplier_parts
+    description: "Joins suppliers and partsupp for downstream marts."
+    columns:
+      - name: supplier_key
+      - name: supplier_name
+      - name: part_key
+      - name: avail_qty
+      - name: supply_cost

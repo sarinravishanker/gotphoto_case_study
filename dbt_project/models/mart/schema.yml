@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: mart_orders
+    description: "Final orders mart with customer, lineitem, and part details."
+    columns:
+      - name: order_key
+      - name: order_date
+      - name: total_price
+      - name: customer_name
+      - name: line_number
+      - name: part_key
+      - name: quantity
+      - name: extended_price
+      - name: part_name
+      - name: part_brand
+  - name: mart_customer_summary
+    description: "Customer-level summary with order count and total spend."
+    columns:
+      - name: customer_key
+      - name: customer_name
+      - name: order_count
+      - name: total_spend
