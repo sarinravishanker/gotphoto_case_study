@@ -84,40 +84,13 @@ The staging layer follows dimensional modeling principles with clear separation 
 - *Optimization*: Pre-calculated customer lifetime value, RFM scores
 - *Use Case*: Customer relationship management, marketing analytics
 
-### Business Questions Answered
+### Potential Business Questions Answered
 
-#### Strategic Business Questions
+- **Customer Metrics**: Customer lifetime value (CLV), churn rate, and segmentation by purchasing behavior.
+- **Revenue Metrics**: Total revenue, gross margin, and average order value.
+- **Supplier Metrics**: Supplier reliability score and average lead time.
+- **Parts Metrics**: Inventory turnover rate and parts with single-source risk.
 
-**Revenue & Profitability Analysis**:
-- What are our top-performing products by revenue and margin?
-- Which customer segments generate the highest lifetime value?
-- How do seasonal trends affect order patterns and profitability?
-- What is the impact of discounting on overall profitability?
-
-**Supply Chain Optimization**:
-- Which suppliers provide the best cost-to-quality ratio?
-- What are the lead times and reliability metrics by supplier?
-- How does geographic distribution affect shipping costs and delivery times?
-- Which parts have supply chain risks due to single-source dependencies?
-
-**Customer Analytics**:
-- What are the key customer segments based on purchasing behavior?
-- Which customers are at risk of churning based on order frequency?
-- What is the customer acquisition cost vs. lifetime value by region?
-- How do customer preferences vary by geographic location?
-
-**Operational Insights**:
-- What are peak ordering periods and resource requirements?
-- Which order patterns indicate potential fraud or data quality issues?
-- How do shipping methods affect customer satisfaction and costs?
-- What is the optimal inventory level by part and supplier?
-
-
-### Data Quality Framework
-- **Source Freshness**: Automated monitoring of data freshness with configurable thresholds
-- **Schema Tests**: Uniqueness, not-null, relationships, and accepted values validation
-- **Custom Tests**: Business rule validation and data quality checks
-- **Elementary Integration**: Comprehensive data observability and anomaly detection
 
 ### Incremental Loading
 - **Orders**: Incremental updates based on `ORDER_KEY` (always increasing)
@@ -232,8 +205,6 @@ dbt test --profiles-dir profiles
 
 # Run tests for specific layer
 dbt test --select staging --profiles-dir profiles
-dbt test --select intermediate --profiles-dir profiles
-dbt test --select mart --profiles-dir profiles
 ```
 
 #### 3. Test Types Implemented
@@ -242,15 +213,6 @@ dbt test --select mart --profiles-dir profiles
 - **Relationships**: Foreign key integrity
 - **Accepted Values**: Enumerated value validation
 - **Custom Business Rules**: Domain-specific validation
-
-#### 4. Data Observability (Elementary)
-```bash
-# Generate data quality report
-edr report
-
-# Monitor data freshness and anomalies
-edr monitor
-```
 
 ## Orchestration via Airflow on Production
 
@@ -300,36 +262,13 @@ default_args = {
 }
 ```
 
-## Future Improvements
 
-### Data Engineering Enhancements
-- [ ] **Schema Evolution**: Implement automated schema change detection and handling
-- [ ] **Data Lineage**: Enhanced lineage tracking with DataHub or Apache Atlas
-- [ ] **Streaming Data**: Add real-time data processing with Kafka/Kinesis
-- [ ] **Data Catalog**: Implement comprehensive data discovery and cataloging
+### Future Improvements
 
-### Pipeline Optimizations
-- [ ] **Dynamic DAGs**: Generate DAGs based on configuration files
-- [ ] **Parallel Processing**: Optimize dbt model dependencies for parallel execution
-- [ ] **Incremental Strategies**: Implement more sophisticated incremental loading patterns
-- [ ] **Data Partitioning**: Optimize Snowflake table clustering and partitioning
-
-### Quality & Monitoring
-- [ ] **Great Expectations**: Advanced data quality validation
-- [ ] **Data Drift Detection**: ML-based anomaly detection for data patterns
-- [ ] **SLA Monitoring**: Implement comprehensive SLA tracking and alerting
-- [ ] **Cost Optimization**: Automated Snowflake warehouse scaling based on workload
-
-### DevOps & Infrastructure
-- [ ] **Kubernetes**: Migrate to Kubernetes for better scalability
-- [ ] **Terraform**: Infrastructure as Code for cloud resources
-- [ ] **Multi-Environment**: Separate dev/staging/prod environments
-- [ ] **Secrets Management**: Enhanced security with dedicated secret management
-
-### Analytics & Business Intelligence
-- [ ] **Reverse ETL**: Sync data back to operational systems
-- [ ] **Real-time Dashboards**: Streaming analytics dashboards
-- [ ] **ML Feature Store**: Feature engineering pipeline for ML models
-- [ ] **Data Products**: Self-service analytics platform
+- **Automated Schema Evolution**: Enable detection and handling of schema changes in source data.
+- **Enhanced Data Lineage**: Integrate tools like DataHub or Apache Atlas for comprehensive lineage tracking.
+- **Advanced Data Quality**: Implement Great Expectations for robust data validation and anomaly detection.
+- **Self-Service Analytics**: Develop a platform for business users to access and analyze data products independently.
+- **CI/CD Enhancements**: Expand automated testing, deployment, and monitoring pipelines for faster and safer releases.
 
 ---
