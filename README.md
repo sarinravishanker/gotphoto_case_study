@@ -158,17 +158,17 @@ cd gotphoto_case_study
 
 ```bash
 # Build and start all services
-docker-compose up --build
+docker-compose up --build -d
 
-# Access Airflow UI at http://localhost:8080
-# Login: airflow / airflow
 ```
 
 ### 3. Run dbt Pipeline
 
 ```bash
-# Install dbt packages
+# Access the running container
 docker-compose exec airflow-webserver bash
+
+#change directory and install dbt packages
 cd dbt_project
 dbt deps --profiles-dir profiles
 
