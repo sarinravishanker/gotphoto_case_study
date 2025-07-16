@@ -27,6 +27,7 @@ services:
       - POSTGRES_PORT=5432
       - SNOWFLAKE_USERNAME=${SNOWFLAKE_USERNAME}
       - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT}
     volumes:
       - ./airflow/dags:/opt/airflow/dags  # Mount the correct DAGs folder
       - ./logs:/opt/airflow/logs
