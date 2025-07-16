@@ -7,6 +7,7 @@
 - [DBT Lineage](#dbt-lineage)
 - [Approach](#approach)
 - [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
 - [Testing via the Airflow UI](#testing-via-the-airflow-ui)
 - [Orchestration Strategies](#orchestration-strategies)
 
