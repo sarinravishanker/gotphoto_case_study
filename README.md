@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
+- [Project Overview](#project-overview)
 - [Data Pipeline Flow](#data-pipeline-flow)
 - [DBT Lineage](#dbt-lineage)
 - [Approach](#approach)
@@ -10,11 +10,12 @@
 - [Testing via the Airflow UI](#testing-via-the-airflow-ui)
 - [Orchestration Strategies](#orchestration-strategies)
 
-## Introduction
+## Project Overview
 
-This project demonstrates a comprehensive data engineering pipeline using modern ELT (Extract, Load, Transform) practices. Built on the TPC-H benchmark dataset from Snowflake, it showcases end-to-end data modeling, quality testing, and orchestration using dbt, Airflow, and containerized deployments.
+This project demonstrates a data engineering pipeline that processes TPC-H benchmark data
+using modern ELT practices using dbt, Airflow, and Snowflake.The pipeline is containerized using Docker for easy deployment and scalability.
 
-The pipeline transforms raw transactional data into analytics-ready data marts through multiple layers of data modeling, implementing best practices for data quality, observability, and CI/CD automation.
+> **Note**: The DBT `profiles.yml` file is configured to use the `sandbox` target by default.
 
 ## Data Pipeline Flow
 
