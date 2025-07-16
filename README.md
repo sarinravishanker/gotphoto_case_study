@@ -8,25 +8,7 @@ The pipeline transforms raw transactional data into analytics-ready data marts t
 
 ## Data Pipeline Flow
 
-```mermaid
-graph TD
-    A[Snowflake Sample Data<br/>TPCH_SF1] --> B[Staging Layer<br/>Clean & Standardize]
-    B --> C[Intermediate Layer<br/>Business Logic & Joins]
-    C --> D[Mart Layer<br/>Analytics-Ready Tables]
-    
-    B --> E[Data Quality Tests]
-    C --> E
-    D --> E
-    
-    F[Elementary<br/>Data Observability] --> B
-    F --> C
-    F --> D
-    
-    G[Airflow<br/>Orchestration] --> H[dbt Pipeline]
-    H --> B
-    H --> C
-    H --> D
-```
+![Data Pipeline Flow](./images/datapipeline_flow.png)
 
 ### Pipeline Layers:
 1. **Raw Data**: Snowflake TPC-H sample data (8 tables)
