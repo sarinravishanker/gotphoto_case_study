@@ -109,6 +109,9 @@ models:
               to: ref('stg_customer')
               field: customer_key
       - name: order_status
+        data_tests:
+          - accepted_values:
+              values: ['P', 'O', 'F']
       - name: total_price
       - name: order_date
       - name: order_priority
