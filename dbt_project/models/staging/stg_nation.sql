@@ -1,7 +1,7 @@
 -- Dimension: Nation
 SELECT
-  N_NATIONKEY AS nation_key,
-  N_NAME AS nation_name,
-  N_REGIONKEY AS region_key,
-  N_COMMENT AS nation_comment
+    n_nationkey AS nation_key,
+    n_name AS nation_name,
+    n_regionkey AS region_key,
+    n_comment AS nation_comment
 FROM {{ source('tpch_sf1', 'nation') }}

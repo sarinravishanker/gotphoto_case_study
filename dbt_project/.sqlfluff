@@ -78,8 +78,8 @@ unwrap_wrapped_queries = True
 [sqlfluff:templater:dbt]
 project_dir = ./
 profiles_dir = ./profiles
-profile = hero_software_dbt
-target = dev
+profile = gotphoto_snowflake
+target = sandbox
 
 [sqlfluff:indentation]
 # See https://docs.sqlfluff.com/en/stable/layout.html#configuring-indent-locations

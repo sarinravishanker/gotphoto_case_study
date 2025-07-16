@@ -1,10 +1,10 @@
 -- Dimension: Supplier
 SELECT
-  S_SUPPKEY AS supplier_key,
-  S_NAME AS supplier_name,
-  S_ADDRESS AS supplier_address,
-  S_NATIONKEY AS nation_key,
-  S_PHONE AS supplier_phone,
-  S_ACCTBAL AS supplier_acctbal,
-  S_COMMENT AS supplier_comment
+    s_suppkey AS supplier_key,
+    s_name AS supplier_name,
+    s_address AS supplier_address,
+    s_nationkey AS nation_key,
+    s_phone AS supplier_phone,
+    s_acctbal AS supplier_acctbal,
+    s_comment AS supplier_comment
 FROM {{ source('tpch_sf1', 'supplier') }}

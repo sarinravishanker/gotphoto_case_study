@@ -1,11 +1,11 @@
 -- Dimension: Customer
 SELECT
-  C_CUSTKEY AS customer_key,
-  C_NAME AS customer_name,
-  C_ADDRESS AS customer_address,
-  C_NATIONKEY AS nation_key,
-  C_PHONE AS customer_phone,
-  C_ACCTBAL AS customer_acctbal,
-  C_MKTSEGMENT AS customer_mktsegment,
-  C_COMMENT AS customer_comment
+    c_custkey AS customer_key,
+    c_name AS customer_name,
+    c_address AS customer_address,
+    c_nationkey AS nation_key,
+    c_phone AS customer_phone,
+    c_acctbal AS customer_acctbal,
+    c_mktsegment AS customer_mktsegment,
+    c_comment AS customer_comment
 FROM {{ source('tpch_sf1', 'customer') }}

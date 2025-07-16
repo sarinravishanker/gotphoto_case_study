@@ -6,16 +6,16 @@
 ) }}
 
 SELECT
-  O_ORDERKEY AS order_key,
-  O_CUSTKEY AS customer_key,
-  O_ORDERSTATUS AS order_status,
-  O_TOTALPRICE AS total_price,
-  O_ORDERDATE AS order_date,
-  O_ORDERPRIORITY AS order_priority,
-  O_CLERK AS clerk,
-  O_SHIPPRIORITY AS ship_priority,
-  O_COMMENT AS order_comment
+    o_orderkey AS order_key,
+    o_custkey AS customer_key,
+    o_orderstatus AS order_status,
+    o_totalprice AS total_price,
+    o_orderdate AS order_date,
+    o_orderpriority AS order_priority,
+    o_clerk AS clerk,
+    o_shippriority AS ship_priority,
+    o_comment AS order_comment
 FROM {{ source('tpch_sf1', 'orders') }}
 {% if is_incremental() %}
-  WHERE O_ORDERKEY > (SELECT max(order_key) FROM {{ this }})
+    WHERE o_orderkey > (SELECT MAX(order_key) FROM {{ this }})
 {% endif %}
