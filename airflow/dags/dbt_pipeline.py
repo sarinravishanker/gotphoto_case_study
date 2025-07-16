@@ -28,7 +28,7 @@ with DAG(
         task_id="execute_dbt_models",
         bash_command="""
         cd /opt/airflow/dbt_project && dbt deps &&
-        dbt run --profiles-dir profiles
+        dbt build --exclude elementary --profiles-dir profiles
         """
     )
 

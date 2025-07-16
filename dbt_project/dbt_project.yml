@@ -17,11 +17,12 @@ clean-targets: # directories to be removed by `dbt clean`
     - "logs"
 
 flags:
-  require_explicit_package_overrides_for_builtin_materializations: False
+  require_explicit_package_overrides_for_builtin_materializations: false
 
 models:
   elementary:
     +schema: 'elementary'
+    +enabled: true
   gotphoto_case_study:
     staging:
       +materialized: table
