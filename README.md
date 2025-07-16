@@ -19,59 +19,55 @@ The pipeline transforms raw transactional data into analytics-ready data marts t
 ## DBT ERD Diagram
 
 ```mermaid
-erDiagram
-    REGION ||--o{ NATION : "has"
-    NATION ||--o{ SUPPLIER : "contains"
-    NATION ||--o{ CUSTOMER : "contains"
-    CUSTOMER ||--o{ ORDERS : "places"
-    ORDERS ||--o{ LINEITEM : "contains"
-    SUPPLIER ||--o{ LINEITEM : "supplies"
-    PART ||--o{ LINEITEM : "ordered_in"
-    PART ||--o{ PARTSUPP : "supplied_by"
-    SUPPLIER ||--o{ PARTSUPP : "supplies"
-
-    REGION {
-        int REGIONKEY PK
-        string NAME
-        string COMMENT
-    }
+graph TD
+    subgraph "Staging Layer"
+        A[stg_region]
+        B[stg_nation]
+        C[stg_customer]
+        D[stg_supplier]
+        E[stg_part]
+        F[stg_partsupp]
+        G[stg_orders]
+        H[stg_lineitem]
+    end
     
-    NATION {
-        int NATIONKEY PK
-        string NAME
-        int REGIONKEY FK
-        string COMMENT
-    }
+    subgraph "Intermediate Layer"
+        I[int_customer_orders]
+        J[int_order_lineitems]
+        K[int_supplier_parts]
+    end
     
-    CUSTOMER {
-        int CUSTKEY PK
-        string NAME
-        string ADDRESS
-        int NATIONKEY FK
-        string PHONE
-        decimal ACCTBAL
-        string MKTSEGMENT
-    }
+    subgraph "Mart Layer"
+        L[mart_orders]
+        M[mart_customer_summary]
+    end
     
-    ORDERS {
-        int ORDERKEY PK
-        int CUSTKEY FK
-        char ORDERSTATUS
-        decimal TOTALPRICE
-        date ORDERDATE
-        string ORDERPRIORITY
-    }
+    %% Staging to Intermediate flows
+    C --> I
+    G --> I
+    G --> J
+    H --> J
+    D --> K
+    F --> K
     
-    LINEITEM {
-        int ORDERKEY PK,FK
-        int PARTKEY FK
-        int SUPPKEY FK
-        int LINENUMBER PK
-        decimal QUANTITY
-        decimal EXTENDEDPRICE
-        decimal DISCOUNT
-        date SHIPDATE
-    }
+    %% Intermediate to Mart flows
+    I --> L
+    J --> L
+    I --> M
+    
+    %% Direct Staging to Mart flows
+    C --> L
+    E --> L
+    C --> M
+    
+    %% Styling
+    classDef staging fill:#e1f5fe
+    classDef intermediate fill:#f3e5f5
+    classDef mart fill:#e8f5e8
+    
+    class A,B,C,D,E,F,G,H staging
+    class I,J,K intermediate
+    class L,M mart
 ```
 
 ## Approach
