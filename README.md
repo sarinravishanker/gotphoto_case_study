@@ -101,7 +101,8 @@ The `dim_` and `fct_` prefixes immediately communicate the table's purpose to an
 - **Uniqueness**: Primary key constraints
 - **Not Null**: Critical field validation
 - **Relationships**: Foreign key integrity
-- **Accepted Values**: Enumerated value validation
+- **Accepted Values**: Ensures fields contain only predefined, allowed values
+- **Accepted Range**: Validates that numeric fields fall within specified minimum and maximum limits
 
 ## Tech Stack
 

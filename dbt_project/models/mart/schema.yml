@@ -21,3 +21,7 @@ models:
       - name: customer_name
       - name: order_count
       - name: total_spend
+        data_tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                max_value: 50000000
