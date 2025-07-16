@@ -208,6 +208,9 @@ dbt source freshness --profiles-dir profiles
 6. Monitor task progress in the Graph View
 7. Check logs for detailed execution information
 
+
+![Airflow UI](./images/airflow_ui.png)
+
 ## Orchestration Strategies
 
 - **AWS MWAA (Managed Airflow)**: Fully managed Airflow service
