@@ -126,7 +126,7 @@ git clone https://github.com/sarinravishanker/gotphoto_case_study.git
 cd gotphoto_case_study
 
 # Copy environment template
-cp .env.example .env
+cp .env .env
 
 # Fill in your Snowflake credentials in .env
 SNOWFLAKE_USERNAME=your_username
