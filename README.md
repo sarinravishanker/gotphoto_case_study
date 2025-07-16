@@ -20,6 +20,18 @@ The pipeline transforms raw transactional data into analytics-ready data marts t
 
 ![DBT Lineage](./images/lineage.png)
 
+### Data Flow Architecture
+
+The lineage diagram illustrates the three-layer architecture with clear data dependencies:
+
+**Layer 1 → Layer 2 Dependencies**:
+- Customer orders aggregation combines customer and order data
+- Order line items enrichment joins orders with line item details
+- Supplier parts analysis merges supplier, part, and part-supplier data
+
+**Layer 2 → Layer 3 Dependencies**:
+- Mart tables leverage pre-computed intermediate models for performance
+- Final marts include dimension enrichment for complete business context
 
 
 
@@ -29,6 +41,77 @@ The pipeline transforms raw transactional data into analytics-ready data marts t
 - **Staging Layer**: Source-conformed models with cleaned column names and data types
 - **Intermediate Layer**: Business logic implementation and entity relationships
 - **Mart Layer**: Denormalized tables optimized for analytics and reporting
+
+### Model Design Reasoning
+
+#### Staging Layer: Dimensional Modeling Foundation
+The staging layer follows dimensional modeling principles with clear separation between dimensions and facts:
+
+**Dimension Tables (`stg_dim_*`)**:
+- **`stg_dim_region`** & **`stg_dim_nation`**: Geographic hierarchy for regional analysis
+- **`stg_dim_customer`**: Customer master data with demographic information
+- **`stg_dim_supplier`**: Supplier master data for vendor analysis
+- **`stg_dim_part`**: Product catalog with manufacturing details
+
+**Fact Tables (`stg_fct_*`)**:
+- **`stg_fct_orders`**: Order header information (one record per order)
+- **`stg_fct_lineitem`**: Order line details (multiple lines per order)
+- **`stg_fct_partsupp`**: Supplier-part relationships with pricing
+
+*Reasoning*: This separation enables efficient joins, supports star schema design, and provides clear semantic meaning. The `dim_` and `fct_` prefixes immediately communicate the table's purpose to analysts and downstream consumers.
+
+#### Intermediate Layer: Business Logic Implementation
+**`int_customer_orders`**: Pre-aggregated customer order metrics
+- *Purpose*: Reduces computation for customer-centric analysis
+- *Business Logic*: Customer lifetime value, order frequency, average order size
+
+**`int_order_lineitems`**: Enriched order details with line-level calculations
+- *Purpose*: Order profitability analysis and product performance
+- *Business Logic*: Extended pricing, discounts, taxes, shipping calculations
+
+**`int_supplier_parts`**: Supplier performance and part availability
+- *Purpose*: Supply chain optimization and vendor analysis
+- *Business Logic*: Supplier reliability, part costs, availability metrics
+
+#### Mart Layer: Analytics-Ready Data Products
+**`mart_orders`**: Comprehensive order analytics
+- *Design*: Wide table with all order dimensions and metrics
+- *Optimization*: Pre-joined for fast dashboard queries
+- *Use Case*: Order management dashboards, sales reporting
+
+**`mart_customer_summary`**: Customer analytics and segmentation
+- *Design*: Aggregated customer metrics with derived KPIs
+- *Optimization*: Pre-calculated customer lifetime value, RFM scores
+- *Use Case*: Customer relationship management, marketing analytics
+
+### Business Questions Answered
+
+#### Strategic Business Questions
+
+**Revenue & Profitability Analysis**:
+- What are our top-performing products by revenue and margin?
+- Which customer segments generate the highest lifetime value?
+- How do seasonal trends affect order patterns and profitability?
+- What is the impact of discounting on overall profitability?
+
+**Supply Chain Optimization**:
+- Which suppliers provide the best cost-to-quality ratio?
+- What are the lead times and reliability metrics by supplier?
+- How does geographic distribution affect shipping costs and delivery times?
+- Which parts have supply chain risks due to single-source dependencies?
+
+**Customer Analytics**:
+- What are the key customer segments based on purchasing behavior?
+- Which customers are at risk of churning based on order frequency?
+- What is the customer acquisition cost vs. lifetime value by region?
+- How do customer preferences vary by geographic location?
+
+**Operational Insights**:
+- What are peak ordering periods and resource requirements?
+- Which order patterns indicate potential fraud or data quality issues?
+- How do shipping methods affect customer satisfaction and costs?
+- What is the optimal inventory level by part and supplier?
+
 
 ### Data Quality Framework
 - **Source Freshness**: Automated monitoring of data freshness with configurable thresholds
