@@ -118,6 +118,34 @@ The `dim_` and `fct_` prefixes immediately communicate the table's purpose to an
 - Access to a Snowflake instance
 - Git installed
 
+### 0. Snowflake Database Setup (Required)
+
+Before running the pipeline, create the necessary databases and schemas in your Snowflake instance manually:
+
+```sql
+-- Connect to your Snowflake instance and run these commands
+
+-- Create databases
+CREATE DATABASE IF NOT EXISTS ANALYTICS_DB;
+CREATE DATABASE IF NOT EXISTS ELEMENTARY;
+
+-- Create schemas in ANALYTICS_DB
+USE DATABASE ANALYTICS_DB;
+CREATE SCHEMA IF NOT EXISTS STAGING;
+CREATE SCHEMA IF NOT EXISTS INTERMEDIATE;
+CREATE SCHEMA IF NOT EXISTS MART;
+
+-- Verify schemas were created
+SHOW SCHEMAS IN DATABASE ANALYTICS_DB;
+
+-- Grant necessary permissions (adjust role as needed)
+GRANT USAGE ON DATABASE ANALYTICS_DB TO ROLE YOUR_ROLE;
+GRANT USAGE ON DATABASE ELEMENTARY TO ROLE YOUR_ROLE;
+GRANT ALL ON SCHEMA ANALYTICS_DB.STAGING TO ROLE YOUR_ROLE;
+GRANT ALL ON SCHEMA ANALYTICS_DB.INTERMEDIATE TO ROLE YOUR_ROLE;
+GRANT ALL ON SCHEMA ANALYTICS_DB.MART TO ROLE YOUR_ROLE;
+```
+
 ### 1. Environment Setup
 
 ```bash
@@ -154,11 +182,11 @@ dbt deps --profiles-dir profiles
 # Test connection
 dbt debug --profiles-dir profiles
 
-# Run the pipeline
-dbt run --exclude elementary --profiles-dir profiles
+# Initialize elementary models (first-time setup)
+dbt run --select elementary --profiles-dir profiles
 
-# Run tests
-dbt test --profiles-dir profiles
+# Run the models & tests defined
+dbt build --exclude elementary --profiles-dir profiles
 
 # Check source freshness
 dbt source freshness --profiles-dir profiles
