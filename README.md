@@ -1,4 +1,4 @@
-# GotPhoto Case Study - Data Engineering Project
+# GotPhoto Case Study - Data Platform
 
 ## Table of Contents
 
