@@ -138,6 +138,7 @@ CREATE SCHEMA IF NOT EXISTS ELEMENTARY;
 
 -- Verify schemas were created
 SHOW SCHEMAS IN DATABASE ANALYTICS_DB;
+```
 
 ### 1. Environment Setup
 
