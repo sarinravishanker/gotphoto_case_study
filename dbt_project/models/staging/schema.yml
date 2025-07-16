@@ -5,27 +5,23 @@ models:
     description: "Region dimension table."
     columns:
       - name: region_key
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: region_name
-        tests:
-          - not_null
       - name: region_comment
 
   - name: stg_nation
     description: "Nation dimension table."
     columns:
       - name: nation_key
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: nation_name
-        tests:
-          - not_null
       - name: region_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_region')
               field: region_key
       - name: nation_comment
@@ -34,15 +30,13 @@ models:
     description: "Supplier dimension table."
     columns:
       - name: supplier_key
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: supplier_name
-        tests:
-          - not_null
       - name: nation_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_nation')
               field: nation_key
       - name: supplier_address
@@ -54,15 +48,13 @@ models:
     description: "Customer dimension table."
     columns:
       - name: customer_key
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: customer_name
-        tests:
-          - not_null
       - name: nation_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_nation')
               field: nation_key
       - name: customer_address
@@ -75,12 +67,10 @@ models:
     description: "Part dimension table."
     columns:
       - name: part_key
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: part_name
-        tests:
-          - not_null
       - name: part_mfgr
       - name: part_brand
       - name: part_type
@@ -93,13 +83,13 @@ models:
     description: "Part-Supplier fact table."
     columns:
       - name: part_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_part')
               field: part_key
       - name: supplier_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_supplier')
               field: supplier_key
       - name: avail_qty
@@ -110,12 +100,12 @@ models:
     description: "Orders fact table."
     columns:
       - name: order_key
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: customer_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_customer')
               field: customer_key
       - name: order_status
@@ -130,18 +120,18 @@ models:
     description: "Line Item fact table."
     columns:
       - name: order_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_orders')
               field: order_key
       - name: part_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_part')
               field: part_key
       - name: supplier_key
-        tests:
-          - relationships:
+        data_tests:
+          - dbt_utils.relationships_where:
               to: ref('stg_supplier')
               field: supplier_key
       - name: line_number

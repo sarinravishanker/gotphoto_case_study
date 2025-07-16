@@ -17,7 +17,7 @@ clean-targets: # directories to be removed by `dbt clean`
     - "logs"
 
 flags:
-  require_explicit_package_overrides_for_builtin_materializations: false
+  require_explicit_package_overrides_for_builtin_materializations: False
 
 models:
   elementary:

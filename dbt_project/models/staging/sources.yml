@@ -3,6 +3,9 @@ sources:
   - name: tpch_sf1
     database: SNOWFLAKE_SAMPLE_DATA
     schema: TPCH_SF1
+    config:  # default freshness
+      freshness:
+        error_after: {count: 8, period: hour}
     tables:
       - name: region
       - name: nation
@@ -11,4 +14,7 @@ sources:
       - name: part
       - name: partsupp
       - name: orders
+        freshness:
+          error_after: {count: 1, period: day}
+        loaded_at_field: "CAST(o_orderdate AS TIMESTAMP)"
       - name: lineitem
