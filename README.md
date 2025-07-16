@@ -31,20 +31,6 @@ using modern ELT practices using dbt, Airflow, and Snowflake.The pipeline is con
 
 ![DBT Lineage](./images/lineage.png)
 
-### Data Flow Architecture
-
-The lineage diagram illustrates the three-layer architecture with clear data dependencies:
-
-**Layer 1 → Layer 2 Dependencies**:
-- Customer orders aggregation combines customer and order data
-- Order line items enrichment joins orders with line item details
-- Supplier parts analysis merges supplier, part, and part-supplier data
-
-**Layer 2 → Layer 3 Dependencies**:
-- Mart tables leverage pre-computed intermediate models for performance
-- Final marts include dimension enrichment for complete business context
-
-
 
 ## Approach
 
