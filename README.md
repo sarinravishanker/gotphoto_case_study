@@ -219,6 +219,26 @@ dbt source freshness --profiles-dir profiles
   - Resource isolation and multi-tenancy support
   - Custom operator deployment for dbt integration
 
+## Future Improvements
 
+### 1. CI/CD Pipeline Enhancement
+- **GitHub Actions Integration**: Implement automated testing and deployment workflows
+- **Branch Protection**: Enforce code review and automated tests before merging such as linting checks, no hard coded references etc
+
+
+### 2. Pytest for Airflow DAGs
+- **DAG Validation**: Unit tests to ensure DAGs compile and load correctly
+- **Task Logic Testing**: Test individual task functions and operators
+- **Integration Tests**: End-to-end pipeline testing with mock data
+
+### 3. dbt Documentation Portal
+- **Automated Doc Generation**: `dbt docs generate` integrated into CI/CD pipeline
+- **Hosted Documentation**: Deploy docs to GitHub Pages or S3 for team access
+- **Lineage Visualization**: Interactive data lineage graphs for stakeholders
+- **Business Glossary**: Centralized definitions for metrics and business terms
+
+### 4. Alerting with Elementary
+- **Data Quality Monitoring**: Real-time alerts for test/model failures and anomalies
+- **Slack/Teams Integration**: Instant notifications for pipeline issues
 
 
