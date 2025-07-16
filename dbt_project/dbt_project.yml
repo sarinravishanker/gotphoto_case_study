@@ -25,14 +25,20 @@ models:
     +enabled: true
   gotphoto_case_study:
     staging:
+      +docs:
+        node_color: "#cd7f32"
       +materialized: table
       +tags: ['staging']
       +schema: 'staging'
     intermediate:
+      +docs:
+        node_color: "#4c72b0"
       +materialized: table
       +tags: ['intermediate']
       +schema: 'intermediate'
     mart:
+      +docs:
+        node_color: "#55a868"
       +materialized: table
       +tags: ['mart']
       +schema: 'mart'

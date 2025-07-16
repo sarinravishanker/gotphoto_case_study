@@ -52,8 +52,6 @@ services:
       - POSTGRES_PASSWORD=mysecretpassword
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
-      - SNOWFLAKE_USERNAME=${SNOWFLAKE_USERNAME}
-      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
     command: ["bash", "-c", "airflow db init && airflow scheduler"]
     volumes:
       - ./airflow/dags:/opt/airflow/dags  # Mount the correct DAGs folder

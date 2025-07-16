@@ -11,6 +11,6 @@ SELECT
     l.discount,
     l.tax,
     l.ship_date
-FROM {{ ref('stg_orders') }} AS o
-LEFT JOIN {{ ref('stg_lineitem') }} AS l
+FROM {{ ref('stg_fct_orders') }} AS o
+LEFT JOIN {{ ref('stg_fct_lineitem') }} AS l
     ON o.order_key = l.order_key

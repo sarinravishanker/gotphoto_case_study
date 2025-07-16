@@ -16,59 +16,12 @@ The pipeline transforms raw transactional data into analytics-ready data marts t
 3. **Intermediate**: Business logic, joins, and aggregations
 4. **Mart**: Final analytics-ready data marts for reporting
 
-## DBT ERD Diagram
+## DBT Lineage
 
-```mermaid
-graph TD
-    subgraph "Staging Layer"
-        A[stg_region]
-        B[stg_nation]
-        C[stg_customer]
-        D[stg_supplier]
-        E[stg_part]
-        F[stg_partsupp]
-        G[stg_orders]
-        H[stg_lineitem]
-    end
-    
-    subgraph "Intermediate Layer"
-        I[int_customer_orders]
-        J[int_order_lineitems]
-        K[int_supplier_parts]
-    end
-    
-    subgraph "Mart Layer"
-        L[mart_orders]
-        M[mart_customer_summary]
-    end
-    
-    %% Staging to Intermediate flows
-    C --> I
-    G --> I
-    G --> J
-    H --> J
-    D --> K
-    F --> K
-    
-    %% Intermediate to Mart flows
-    I --> L
-    J --> L
-    I --> M
-    
-    %% Direct Staging to Mart flows
-    C --> L
-    E --> L
-    C --> M
-    
-    %% Styling
-    classDef staging fill:#e1f5fe
-    classDef intermediate fill:#f3e5f5
-    classDef mart fill:#e8f5e8
-    
-    class A,B,C,D,E,F,G,H staging
-    class I,J,K intermediate
-    class L,M mart
-```
+![DBT Lineage](./images/lineage.png)
+
+
+
 
 ## Approach
 

@@ -12,6 +12,6 @@ SELECT
     p.part_name,
     p.part_brand
 FROM {{ ref('int_customer_orders') }} AS o
-LEFT JOIN {{ ref('stg_customer') }} AS c ON o.customer_key = c.customer_key
+LEFT JOIN {{ ref('stg_dim_customer') }} AS c ON o.customer_key = c.customer_key
 LEFT JOIN {{ ref('int_order_lineitems') }} AS l ON o.order_key = l.order_key
-LEFT JOIN {{ ref('stg_part') }} AS p ON l.part_key = p.part_key
+LEFT JOIN {{ ref('stg_dim_part') }} AS p ON l.part_key = p.part_key

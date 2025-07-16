@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_region
+  - name: stg_dim_region
     description: "Region dimension table."
     columns:
       - name: region_key
@@ -11,7 +11,7 @@ models:
       - name: region_name
       - name: region_comment
 
-  - name: stg_nation
+  - name: stg_dim_nation
     description: "Nation dimension table."
     columns:
       - name: nation_key
@@ -22,11 +22,11 @@ models:
       - name: region_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_region')
+              to: ref('stg_dim_region')
               field: region_key
       - name: nation_comment
 
-  - name: stg_supplier
+  - name: stg_dim_supplier
     description: "Supplier dimension table."
     columns:
       - name: supplier_key
@@ -37,14 +37,14 @@ models:
       - name: nation_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_nation')
+              to: ref('stg_dim_nation')
               field: nation_key
       - name: supplier_address
       - name: supplier_phone
       - name: supplier_acctbal
       - name: supplier_comment
 
-  - name: stg_customer
+  - name: stg_dim_customer
     description: "Customer dimension table."
     columns:
       - name: customer_key
@@ -55,7 +55,7 @@ models:
       - name: nation_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_nation')
+              to: ref('stg_dim_nation')
               field: nation_key
       - name: customer_address
       - name: customer_phone
@@ -63,7 +63,7 @@ models:
       - name: customer_mktsegment
       - name: customer_comment
 
-  - name: stg_part
+  - name: stg_dim_part
     description: "Part dimension table."
     columns:
       - name: part_key
@@ -79,24 +79,24 @@ models:
       - name: part_retailprice
       - name: part_comment
 
-  - name: stg_partsupp
+  - name: stg_fct_partsupp
     description: "Part-Supplier fact table."
     columns:
       - name: part_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_part')
+              to: ref('stg_dim_part')
               field: part_key
       - name: supplier_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_supplier')
+              to: ref('stg_dim_supplier')
               field: supplier_key
       - name: avail_qty
       - name: supply_cost
       - name: partsupp_comment
 
-  - name: stg_orders
+  - name: stg_fct_orders
     description: "Orders fact table."
     columns:
       - name: order_key
@@ -106,7 +106,7 @@ models:
       - name: customer_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_customer')
+              to: ref('stg_dim_customer')
               field: customer_key
       - name: order_status
         data_tests:
@@ -119,23 +119,23 @@ models:
       - name: ship_priority
       - name: order_comment
 
-  - name: stg_lineitem
+  - name: stg_fct_lineitem
     description: "Line Item fact table."
     columns:
       - name: order_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_orders')
+              to: ref('stg_fct_orders')
               field: order_key
       - name: part_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_part')
+              to: ref('stg_dim_part')
               field: part_key
       - name: supplier_key
         data_tests:
           - dbt_utils.relationships_where:
-              to: ref('stg_supplier')
+              to: ref('stg_dim_supplier')
               field: supplier_key
       - name: line_number
       - name: quantity
