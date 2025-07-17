@@ -107,6 +107,7 @@ celerybeat.pid
 *.bak
 
 # Environments
+.env
 .venv
 env/
 dbt_env/
