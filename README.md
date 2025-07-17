@@ -147,8 +147,10 @@ SHOW SCHEMAS IN DATABASE ANALYTICS_DB;
 git clone https://github.com/sarinravishanker/gotphoto_case_study.git
 cd gotphoto_case_study
 
-# Update the existing .env file with your Snowflake credentials
-# Edit .env file and fill in your Snowflake details:
+## 🔐 Environment Variables
+
+To run this project, create a `.env` file in the root directory based on `.env.template`. You’ll need valid Snowflake credentials. Fill in your `.env` file with appropriate values.
+
 # SNOWFLAKE_USERNAME=your_username
 # SNOWFLAKE_PASSWORD=your_password  
 # SNOWFLAKE_ACCOUNT=your_account.region.provider
